@@ -2,3 +2,12 @@
   color: white;
   background-color: black;
 } */
+
+
+input {
+  border-radius: 10px;
+  height: 20px;
+  width: 150px;
+  text-align: center;
+  
+}
