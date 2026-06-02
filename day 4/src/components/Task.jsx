@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import "../styles/task.css";
 
 const Task = () => {
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -72,7 +72,7 @@ const Task = () => {
 
     // load(pageNo);
 
-    await setSearch("")
+    await setSearch("");
   }
 
   async function nextPage() {
@@ -97,12 +97,21 @@ const Task = () => {
   const currentItems = products.slice(indexStart, indexStart + PER_PAGE_ITEMS);
   // console.log(currentItems);
 
+  const textElement = document.getElementById("delayed-text") || 0;  
+
+  // if(textElement){
+  //   setTimeout(() => {
+  //     textElement.style.display = "block";
+  //   }, 500);
+    
+  // }
   return (
     // <>
     <div id="task">
+      <div>
       <div id="menu">
         <input
-        value={search}
+          value={search}
           onChange={(e) => {
             setSearch(e.target.value);
           }}
@@ -136,16 +145,19 @@ const Task = () => {
           return (
             <div key={element.id} className="product-container">
               <img src={element.thumbnail} alt={element.title} />
-              <h4>{element.title}</h4>
-              <h5>{element.price}</h5>
-              <button onClick={() => deleteItem(element.id)}>Delete</button>
-            </div>
+              {/* <div id="delayed-text" style={{display: "none"}}> */}
+                <h4>{element.title}</h4>
+                <h5>{element.price}</h5>
+                <button onClick={() => deleteItem(element.id)}>Delete</button>
+              </div>
+            // </div>
           );
         })}
       </div>
 
       {/* <div id="elements"></div> */}
       {/* </> */}
+      </div>
     </div>
   );
 };
