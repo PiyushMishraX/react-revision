@@ -17,6 +17,8 @@ const App = () => {
       </Routes>
 
       
+      {/* we achive client-side-routing through this  */}
+      {/* Server-side routing is a traditional web navigation method where the server handles all URL changes. When a user clicks a link, the browser makes a new HTTP request, and the server returns a completely new HTML document, resulting in a full-page refresh. */}
 
 
     </>
