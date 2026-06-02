@@ -1,0 +1,17 @@
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    /* background-color: rgb(24, 23, 23); */
+    background-color: rgb(47,38,38);
+    /* color: whitesmoke; */
+    color: rgb(197,170,106);
+
+}
