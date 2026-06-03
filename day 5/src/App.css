@@ -1,4 +1,17 @@
+ 
+ * {
+  background-color: rgb(24, 24, 24);
+  color: whitesmoke;
+ }
 
+ input {
+  border: 1px solid white;
+ }
+ button {
+  border: 1px solid white;
+  padding: 3px;
+  border-radius: 5px;
+ }
 #tasks {
   width: 100vw;
   display: flex;

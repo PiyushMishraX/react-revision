@@ -3,15 +3,35 @@ import React, { useEffect, useState } from "react";
 
 const Todo = () => {
   const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(()=>{
+
+    // ([] || JSON.parse(localStorage.getItem("todoList")))
+    let data = localStorage.getItem("todoList")
+    if(data) {
+        return JSON.parse(data)
+    }
+
+    return []
+  });
   useEffect(()=>{
-      localStorage.setItem('todoList', JSON.stringify(todos))
+      localStorage.setItem("todoList", JSON.stringify(todos))
   }, [todos])
   
 
   async function deleteItem(deleteId) {
-    const updatedTodos = todos.filter((item) => item.id !== deleteId);
+    const updatedTodos = todos.filter((item,index) => index !== deleteId);
     setTodos(updatedTodos);
+  }
+
+  const [edit, setEdit] = useState("")
+  async function editItem(id) {
+    let edit = String(prompt(`Current: ${todos[id]} ,Edit: `));
+    if(edit){
+
+        // todos[id] = edit;
+        setTodos(todos => todos.map((item, index) => index === id ? edit : item) );
+    } 
+    
   }
 
   return (
@@ -34,9 +54,12 @@ const Todo = () => {
         <div id="list">
           {todos.map((element,id) => {
             return (
-              <div key={id} >
-                <h2>{element}</h2>
-                <button onClick={() => deleteItem(id)}>Delete</button>
+              <div key={element.id} >
+                <h2 id="written">{element}</h2>
+                <button onClick={() => {deleteItem(id)}}>Delete</button>
+                <button onClick={()=>{
+                    editItem(id)
+                }}>Edit</button>
               </div>
             );
           })}
