@@ -26,3 +26,11 @@
     gap: 10px;
   }
 }
+
+.edits {
+  display: none;
+}
+
+.addHide{
+  display: none;
+}

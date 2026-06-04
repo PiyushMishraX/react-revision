@@ -3,6 +3,12 @@ import React, { useEffect, useState } from "react";
 
 const Todo = () => {
   const [input, setInput] = useState("");
+  const [edit, setEdit] = useState("");
+  const [updateIndex, setUpdateIndex] = useState(-1);
+
+  // const addElement = document.getElementsByClassName("add")
+  // const editElement = document.querySelector(".edit")
+
   const [todos, setTodos] = useState(()=>{
 
     // ([] || JSON.parse(localStorage.getItem("todoList")))
@@ -23,23 +29,53 @@ const Todo = () => {
     setTodos(updatedTodos);
   }
 
-  const [edit, setEdit] = useState("")
+//   const [edit, setEdit] = useState("")
   async function editItem(id) {
-    let edit = String(prompt(`Current: ${todos[id]} ,Edit: `));
-    if(edit){
+    const addElement = document.querySelectorAll(".add")
+    addElement[0].classList.add('addHide')
+    addElement[1].classList.add('addHide')
+    // let edit = String(prompt(`Current: ${todos[id]} ,Edit: `));
 
-        // todos[id] = edit;
-        setTodos(todos => todos.map((item, index) => index === id ? edit : item) );
-    } 
+    await setEdit(todos[id])
+    console.log(edit)
+    console.log(todos[id])
+    await setUpdateIndex(id)
+
+    const editElement = document.querySelectorAll(".edit")
+    editElement[0].classList.remove('edits')
+    editElement[1].classList.remove('edits')
+
+    // if(edit){
+
+
+    //     // todos[id] = edit;
+    //     setTodos(todos => todos.map((item, index) => index === id ? edit : item) );
+    // } 
     
+  }
+
+  function addUpdateItem(){
+    if(edit){
+        // todos[id] = edit;
+        setTodos(todos => todos.map((item, index) => index === updateIndex ? edit : item) );
+    } 
+
+
+    const addElement = document.querySelectorAll(".add")
+    addElement[0].classList.remove('addHide')
+    addElement[1].classList.remove('addHide')
+
+    const editElement = document.querySelectorAll(".edit")
+    editElement[0].classList.add('edits')
+    editElement[1].classList.add('edits')
   }
 
   return (
     <div id="tasks">
       <div id="input">
         <div>Todo List</div>
-        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
-        <button
+        <input className="add" type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+        <button className="add"
           onClick={() => {
             if (input.trim() !== "") {
               setTodos([...todos,input ]);
@@ -51,6 +87,15 @@ const Todo = () => {
         >
           add
         </button>
+
+        <input className="edit edits" type="text" value={edit} onChange={(e) => setEdit(e.target.value)} />
+
+        <button className="edit edits"
+          onClick={() => {
+              addUpdateItem(edit)
+          }}
+        >Update</button>
+
         <div id="list">
           {todos.map((element,id) => {
             return (
